@@ -116,6 +116,7 @@ namespace NorthwindConsole
                             }
                         }
                         db.EditCategory(category);
+                        logger.Info("Category edited");
                     }
                     else if(choice == "10") //display all categories names and desc.
                     {
@@ -265,7 +266,7 @@ namespace NorthwindConsole
                         db.addProduct(product);
                         logger.Info("Product added");
                     }
-                    else if(choice == "6") //Edit a product keep working on this
+                    else if(choice == "6") // Edit a product
                     {
                         var db = new NWConsole_96_ZPHContext();
                         var query2 = db.Categories.OrderBy(c => c.CategoryId);
