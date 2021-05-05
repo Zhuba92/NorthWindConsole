@@ -43,6 +43,32 @@ namespace NorthwindConsole.Mode
             }
         }
 
+        public void addProduct(Products product)
+        {
+            this.Products.Add(product);
+            this.SaveChanges();
+        }
+
+        public void addCategory(Categories category)
+        {
+            this.Categories.Add(category);
+            this.SaveChanges();
+        }
+
+        public void EditProduct(Products updateProduct)
+        {
+            Products product = this.Products.Find(updateProduct.ProductId);
+            product = updateProduct;
+            this.SaveChanges();
+        }
+
+        public void EditCategory(Categories updateCategory)
+        {
+            Categories category = this.Categories.Find(updateCategory.CategoryId);
+            category = updateCategory;
+            this.SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Categories>(entity =>

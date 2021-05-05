@@ -28,5 +28,6 @@ namespace NorthwindConsole.Mode
         public virtual Categories Category { get; set; }
         public virtual Suppliers Supplier { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+
     }
 }
