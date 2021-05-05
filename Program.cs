@@ -349,7 +349,7 @@ namespace NorthwindConsole
 
                         }
                         db.EditProduct(selectedProduct);
-                        logger.Info("Product edited");
+                        logger.Info($"{selectedProduct.ProductName} edited");
                     }
                     else if(choice == "7") //Display all records in products table(name only) distringuish discontinued products
                     {
