@@ -102,18 +102,15 @@ namespace NorthwindConsole
                         category = db.Categories.FirstOrDefault(c => c.CategoryId == selectedCat);
                         Console.WriteLine("What would you like to edit: \n1. Name\n2. Description");
                         int selection = Int32.Parse(Console.ReadLine());
-                        while(selection != 1 || selection != 2)
+                        if(selection == 1)
                         {
-                            if(selection == 1)
-                            {
-                                Console.Write("What is the new name: ");
-                                category.CategoryName = Console.ReadLine();
-                            }
-                            else
-                            {
-                                Console.Write("WHat is the new description: ");
-                                category.CategoryName = Console.ReadLine();
-                            }
+                            Console.Write("What is the new name: ");
+                            category.CategoryName = Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.Write("WHat is the new description: ");
+                            category.CategoryName = Console.ReadLine();
                         }
                         db.EditCategory(category);
                         logger.Info("Category edited");
@@ -276,6 +273,7 @@ namespace NorthwindConsole
                         {
                             Console.WriteLine($"\t{p.ProductId}. {p.ProductName}, {p.SupplierId}, {p.CategoryId}, {p.QuantityPerUnit}, {p.UnitPrice}, {p.UnitsInStock}, {p.UnitsOnOrder}, {p.ReorderLevel}, {p.Discontinued}");
                         }
+                        Console.WriteLine("");
                         Console.WriteLine("Enter the number of the product you would like to edit: ");
                         int id = Int32.Parse(Console.ReadLine());
                         Products selectedProduct = db.Products.FirstOrDefault(p => p.ProductId == id);
@@ -361,14 +359,17 @@ namespace NorthwindConsole
                         var query = db.Products.OrderBy(p => p.ProductId);
                         if(selection == 1)
                         {
+                            logger.Info("Displaying all products\n");
                             query = db.Products.OrderBy(p => p.ProductId);
                         }
                         else if(selection == 2)
                         {
+                            logger.Info("Displaying all current products\n");
                             query = db.Products.Where(p => p.Discontinued == false).OrderBy(p => p.ProductId);
                         }
                         else
                         {
+                            logger.Info("Displaying all discontinued products\n");
                             query = db.Products.Where(p => p.Discontinued == true).OrderBy(p => p.ProductId);
                         }
                         foreach(var item in query)
@@ -383,7 +384,7 @@ namespace NorthwindConsole
                         Console.Write("Which product would you like to see: ");
                         string productViewed = Console.ReadLine();
                         Products product = db.Products.FirstOrDefault(p => p.ProductName == productViewed);
-                        Console.WriteLine($"{product.ProductId}, {product.ProductName}");
+                        Console.WriteLine($"Product ID: {product.ProductId}\nProduct Name:{product.ProductName}\nProduct Category:{product.CategoryId}\nQuantity Per Unit:{product.QuantityPerUnit}\nReorder Level:{product.ReorderLevel}\nSupplier ID:{product.SupplierId}\nUnit Price{product.UnitPrice}\nUnits in stock:{product.UnitsInStock}\nUnits on order:{product.UnitsOnOrder}");
                     }
 
                     Console.WriteLine();
